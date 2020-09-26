@@ -8,6 +8,12 @@ $database = 'database-php';
 // koneksi ke database
 $koneksi = mysqli_connect($localhost, $username, $password, $database);
 
+// cek koneksi
+if (!$koneksi) {
+  die("Koneksi gagal: " . mysqli_connect_error());
+}
+echo "Koneksi berhasil";
+
 if (isset($_POST['submit'])) {
     // menampung dari input teks ke variable
     $nama = $_POST['nama'];
