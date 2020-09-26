@@ -1,3 +1,43 @@
+<?php 
+// nama variable untuk koneksi
+$localhost = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'database-php';
+
+// koneksi ke database
+$koneksi = mysqli_connect($localhost, $username, $password, $database);
+
+if (isset($_POST['submit'])) {
+    // menampung dari input teks ke variable
+    $nama = $_POST['nama'];
+    $tempat_lahir = $_POST['tempat_lahir'];
+    $tgl_lahir = $_POST['tgl_lahir'];
+    $nik = $_POST['nik'];
+    $email = $_POST['email'];
+    $telp = $_POST['telp'];
+    $telp_wali = $_POST['telp_wali'];
+    $pekerjaan = $_POST['pekerjaan'];
+    $alamat = $_POST['alamat'];
+    $program_akademi = $_POST['program_akademi'];
+    $tema_pelatihan = $_POST['tema_pelatihan'];
+    $mitra_pelatihan = $_POST['nama'];
+
+    // insert data
+    $result = "INSERT INTO registrasi VALUES ('', '$nama', '$tempat_lahir', '$tgl_lahir', '$nik', '$email', '$telp', '$telp_wali', '$pekerjaan', '$alamat', '$program_akademi', '$tema_pelatihan', '$mitra_pelatihan')";
+
+    $sql = mysqli_query($koneksi, $result);
+
+    // pengecekan data berhasil masuk / gagal
+    if ($sql) {
+        echo "<script>alert('Data berhasil ditambahkan');</script>";
+    } else {
+        echo "<script>alert('Data gagal ditambahkan');</script>";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,78 +64,80 @@
                     </tr>
                     <tr>
                         <td>
-                            <table border="0">
-                                <tr>
-                                    <td colspan="3">
-                                        Saya Yang bertandatangan dibawah ini :
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="250">Nama Lengkap (Sesuai KTP)</td>
-                                    <td>:</td>
-                                    <td><input type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>Tempat Lahir</td>
-                                    <td>:</td>
-                                    <td><input type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>Tanggal Lahir</td>
-                                    <td>:</td>
-                                    <td><input type="date"></td>
-                                </tr>
-                                <tr>
-                                    <td>NIK/NIP</td>
-                                    <td>:</td>
-                                    <td><input type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>E-Mail Aktif</td>
-                                    <td>:</td>
-                                    <td><input type="email"></td>
-                                </tr>
-                                <tr>
-                                    <td>No. HP Aktif</td>
-                                    <td>:</td>
-                                    <td><input type="number"></td>
-                                </tr>
-                                <tr>
-                                    <td>No HP (Wali/Atasan)</td>
-                                    <td>:</td>
-                                    <td><input type="number"></td>
-                                </tr>
-                                <tr>
-                                    <td>Pekerjaan</td>
-                                    <td>:</td>
-                                    <td><input type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>Alamat Domisili</td>
-                                    <td>:</td>
-                                    <td><textarea name="" id="" cols="40" rows="4"></textarea></td>
-                                </tr>
-                                <tr>
-                                    <td>Program Akademi</td>
-                                    <td>:</td>
-                                    <td><input type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>Tema Pelatihan</td>
-                                    <td>:</td>
-                                    <td><input type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td>Mitra Pelatihan</td>
-                                    <td>:</td>
-                                    <td><input type="text"></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button>Kirim</button> <button>Batal</button></td>
-                                </tr>
-                            </table>
+                            <form action="" method="POST">
+                                <table border="0">
+                                    <tr>
+                                        <td colspan="3">
+                                            Saya Yang bertandatangan dibawah ini :
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="250">Nama Lengkap (Sesuai KTP)</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="nama" placeholder="Masukkan nama lengkap" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tempat Lahir</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="tempat_lahir" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Lahir</td>
+                                        <td>:</td>
+                                        <td><input type="date" name="tgl_lahir" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>NIK/NIP</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="nik" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>E-Mail Aktif</td>
+                                        <td>:</td>
+                                        <td><input type="email" name="email" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>No. HP Aktif</td>
+                                        <td>:</td>
+                                        <td><input type="number" name="telp" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>No HP (Wali/Atasan)</td>
+                                        <td>:</td>
+                                        <td><input type="number" name="telp_wali" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pekerjaan</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="pekerjaan"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alamat Domisili</td>
+                                        <td>:</td>
+                                        <td><textarea name="alamat" id="" cols="40" rows="4"placeholder="Masukkan alamat lengkap" required></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Program Akademi</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="program_akademi" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tema Pelatihan</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="tema_pelatihan" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mitra Pelatihan</td>
+                                        <td>:</td>
+                                        <td><input type="text" name="mitra_pelatihan" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button type="submi" name="submit">Kirim</button> | <button type="button">Batal</button></td>
+                                    </tr>
+                                </table>
+                            </form>
                         </td>
                     </tr>
                     <tr>
