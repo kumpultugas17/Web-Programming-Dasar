@@ -140,7 +140,7 @@ if (isset($_POST['submit'])) {
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                        <td><button type="submi" name="submit">Kirim</button> | <button type="button">Batal</button></td>
+                                        <td><button type="submit" name="submit">Kirim</button> | <button type="button">Batal</button></td>
                                     </tr>
                                 </table>
                             </form>
