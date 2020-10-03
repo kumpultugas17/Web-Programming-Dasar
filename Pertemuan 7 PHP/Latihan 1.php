@@ -26,7 +26,6 @@ if (isset($_POST['submit'])) {
     $program_akademi = $_POST['program_akademi'];
     $tema_pelatihan = $_POST['tema_pelatihan'];
     $mitra_pelatihan = $_POST['mitra_pelatihan'];
-    // var_dump($nama, $tempat_lahir, $tgl_lahir, $nik, $email, $telp, $telp_wali, $pekerjaan, $alamat, $program_akademi, $tema_pelatihan, $mitra_pelatihan);
 
     $result = "INSERT INTO registrasi VALUES ('', '$nama', '$tempat_lahir', '$tgl_lahir', '$nik', '$email', '$telp', '$telp_wali', '$pekerjaan', '$alamat', '$program_akademi', '$tema_pelatihan', '$mitra_pelatihan')";
 
@@ -39,6 +38,9 @@ if (isset($_POST['submit'])) {
     }
 }
 
+
+$rows = "SELECT * FROM registrasi";
+$row = mysqli_query($koneksi, $rows);
 ?>
 
 <!DOCTYPE html>
@@ -155,24 +157,20 @@ if (isset($_POST['submit'])) {
                                     <td>Email</td>
                                     <td>Aksi</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>M. Iqbal Adenan</td>
-                                    <td>Kuala Kapuas</td>
-                                    <td>17 Oktober 1992</td>
-                                    <td>085249099652</td>
-                                    <td>kumpultugas17@gmail.com</td>
-                                    <td><button>Edit</button> <button>Hapus</button></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Agus Setiawan</td>
-                                    <td>Banjarmasin</td>
-                                    <td>4 Agustus 1992</td>
-                                    <td>087843969674</td>
-                                    <td>agus@gmail.com</td>
-                                    <td><button>Edit</button> <button>Hapus</button></td>
-                                </tr>
+                                <?php $no = 1; ?>
+                                <?php foreach ($row as $key) : ?>
+                                    <tr>
+                                        <td><?= $no; ?></td>
+                                        <td><?= $key['nama']; ?></td>
+                                        <td><?= $key['tempat_lahir']; ?></td>
+                                        <td><?= $key['tgl_lahir']; ?></td>
+                                        <td><?= $key['telp']; ?></td>
+                                        <td><?= $key['email']; ?></td>
+                                        <td><button>Edit</button> <button>Hapus</button></td>
+                                    </tr>
+                                    <?php $no++; ?>
+                                <?php endforeach; ?>
+
                             </table>
                         </td>
                     </tr>
