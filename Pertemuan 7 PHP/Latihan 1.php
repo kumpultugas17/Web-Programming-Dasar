@@ -1,3 +1,46 @@
+<?php 
+$localhost = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'database-php';
+
+// koneksi ke database
+$koneksi = mysqli_connect($localhost, $username, $password, $database);
+
+// cek koneksi
+if (!$koneksi) {
+  die("Koneksi gagal: " . mysqli_connect_error());
+}
+echo "Koneksi berhasil";
+
+if (isset($_POST['submit'])) {
+    $nama = $_POST['nama'];
+    $tempat_lahir = $_POST['tempat_lahir'];
+    $tgl_lahir = $_POST['tgl_lahir'];
+    $nik = $_POST['nik'];
+    $email = $_POST['email'];
+    $telp = $_POST['telp'];
+    $telp_wali = $_POST['telp_wali'];
+    $pekerjaan = $_POST['pekerjaan'];
+    $alamat = $_POST['alamat'];
+    $program_akademi = $_POST['program_akademi'];
+    $tema_pelatihan = $_POST['tema_pelatihan'];
+    $mitra_pelatihan = $_POST['mitra_pelatihan'];
+    // var_dump($nama, $tempat_lahir, $tgl_lahir, $nik, $email, $telp, $telp_wali, $pekerjaan, $alamat, $program_akademi, $tema_pelatihan, $mitra_pelatihan);
+
+    $result = "INSERT INTO registrasi VALUES ('', '$nama', '$tempat_lahir', '$tgl_lahir', '$nik', '$email', '$telp', '$telp_wali', '$pekerjaan', '$alamat', '$program_akademi', '$tema_pelatihan', '$mitra_pelatihan')";
+
+    $sql = mysqli_query($koneksi, $result);
+
+    if ($sql) {
+        echo "<p style='color: green;'>Data berhasil ditambahkan!</p>";
+    } else {
+        echo "<p style='color: red;'>Data gagal ditambahkan!</p>";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
