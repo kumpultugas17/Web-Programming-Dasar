@@ -9,20 +9,20 @@ $row = mysqli_fetch_assoc($sql);
 <!DOCTYPE html>
 <html>
 <head>
- <!--Import Google Icon Font-->
- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- <!--Import materialize.css-->
- <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
 
- <!--Let browser know website is optimized for mobile-->
- <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
    <div class="container">
       <div class="row">
          <div class="col s12 m12">
-            <form action="update_biodata.php" method="POST">
+            <form action="update_biodata.php" method="POST" enctype="multipart/form-data">
                <div class="card">
                   <div class="card-content" style="margin-bottom: 1px;">
                      <div class="row">
@@ -55,7 +55,7 @@ $row = mysqli_fetch_assoc($sql);
                                  <option value="<?= $key; ?>" 
                                     <?= $row['agama'] == $key ? 'selected' : '' ?>>
                                     <?= $key; ?>
-                                    </option>
+                                 </option>
                               <?php endforeach ?>
                            </select>
                         </div>
@@ -93,6 +93,12 @@ $row = mysqli_fetch_assoc($sql);
                         <div class="input-field col s12">
                            <input placeholder="Masukkan E-Mail" id="email" type="email" class="validate" name="email" value="<?= $row['email']; ?>">
                            <label for="email" >E-Mail</label>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <img src="images/<?= $row['foto']; ?>" alt="" width="100px"><br>
+                           <input type="file" name="foto">
                         </div>
                      </div>
                   </div>

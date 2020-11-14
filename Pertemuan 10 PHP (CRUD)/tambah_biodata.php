@@ -80,6 +80,11 @@
                            <label for="email">E-Mail</label>
                         </div>
                      </div>
+                     <div class="row">
+                        <div class="input-field col s12">
+                           <input type="file" name="foto">
+                        </div>
+                     </div>
                   </div>
                   <div class="card-action">
                      <button class="btn-small blue accent-3" type="submit">Simpan</button> 

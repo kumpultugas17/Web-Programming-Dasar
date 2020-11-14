@@ -15,6 +15,7 @@ if (isset($_POST['btnserach'])) {
   }
 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -80,23 +81,25 @@ if (isset($_POST['btnserach'])) {
                         <td class="center-align"><?= $row['jenis_kelamin'] == 'L' ? 'Laki-laki' : 'Perempuan'; ?></td>
                         <td class="center-align"><?= $row['telepon']; ?></td>
                         <td class="center-align"><?= $row['email']; ?></td>
-                        <td><img src="images/myfoto.jpeg" alt="" width="30px"></td>
-                        <td width="229pt" class="center-align">
-                          <a href="" class="btn-small cyan accent-3 black-text">Detail</a> 
-                          <a href="edit_biodata.php?id=<?= $row['id']; ?>" class="btn-small yellow accent-3 black-text">Edit</a> 
-                          <a href="hapus_biodata.php?id=<?= $row['id']; ?>" onclick = "return confirm('Data akan dihapus ?')" class="btn-small red accent-3">Hapus</a>
-                        </td>
-                      </tr>
-                    <?php endforeach ?>
-                  </tbody>
-                </table>
+                        <td>
+                          <img src="images/<?= $row['foto'] == '' ? 'default.png' : $row['foto']; ?>" alt="" width="30px"></td>
+                          <td width="229pt" class="center-align">
+                            <a href="detail_biodata.php?id=<?= $row['id']; ?>" class="btn-small cyan accent-3 black-text">Detail</a> 
+                            <a href="edit_biodata.php?id=<?= $row['id']; ?>" class="btn-small yellow accent-3 black-text">Edit</a> 
+                            <a href="hapus_biodata.php?id=<?= $row['id']; ?>" onclick = "return confirm('Data akan dihapus ?')" class="btn-small red accent-3">Hapus</a>
+                          </td>
+                        </tr>
+                      <?php endforeach ?>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="assets/js/materialize.min.js"></script>
-  </body>
-  </html>
+
+      <!--JavaScript at end of body for optimized loading-->
+      <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+    </body>
+    </html>
