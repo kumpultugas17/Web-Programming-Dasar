@@ -1,19 +1,28 @@
 <?php 
 include 'koneksi.php';
 
-$sql = $koneksi->query("SELECT * FROM biodata");
+
+$jumlahDataPerHalaman = 5;
+$hitung = $koneksi->query("SELECT * FROM biodata");
+$jumlahData = mysqli_num_rows($hitung);
+
+$jumlahHalaman = ceil($jumlahData/$jumlahDataPerHalaman);
+$halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
 
 if (isset($_POST['btnserach'])) {
   $search = $_POST['search'];
 
   $sql = $koneksi->query("SELECT * FROM biodata 
-    WHERE nama LIKE '%". $search ."%'");
+    WHERE nama LIKE '%'. $search .'%' ORDER BY id DESC LIMIT $awalData, $jumlahDataPerHalaman");
 
   if (mysqli_num_rows($sql) == 0) {
-    $sql = $koneksi->query("SELECT * FROM biodata");
+    $sql = $koneksi->query("SELECT * FROM biodata ORDER BY id DESC LIMIT $awalData, $jumlahDataPerHalaman");
     echo '<script>alert("Data tidak ditemukan");</script>';
   }
 
+} else {
+  $sql = $koneksi->query("SELECT * FROM biodata ORDER BY id DESC LIMIT $awalData, $jumlahDataPerHalaman");
 }
 
 ?>
@@ -96,10 +105,55 @@ if (isset($_POST['btnserach'])) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!--JavaScript at end of body for optimized loading-->
-      <script type="text/javascript" src="assets/js/materialize.min.js"></script>
-    </body>
-    </html>
+          <div class="row">
+            <div class="col s6 m6">
+              <a href="cetak_xls.php" class="btn-small">Print xls</a> 
+              <a href="cetak_pdf.php" class="btn-small">Print pdf</a>
+            </div>
+            <div class="col s6 m6">
+              <ul class="pagination right">
+
+                <?php if($halamanAktif > 1) : ?>
+                  <li class="waves-effect">
+                    <a href="?page=<?= $halamanAktif - 1; ?>"><i class="material-icons">chevron_left</i></a>
+                  </li>
+                  <?php else : ?>
+                    <li class="disabled">
+                      <a href=""><i class="material-icons">chevron_left</i></a>
+                    </li>
+                  <?php endif; ?>
+
+                  <?php for($i = 1; $i<=$jumlahHalaman; $i++) : ?>
+                    <?php if($i == $halamanAktif) : ?>
+                      <li class="active">
+                        <a href="?page=<?= $i; ?>"><?= $i; ?></a>
+                      </li>
+                      <?php else : ?>
+                        <li class="waves-effect">
+                          <a href="?page=<?= $i; ?>"><?= $i; ?></a>
+                        </li>
+                      <?php endif; ?>
+                    <?php endfor; ?>
+
+                    <?php if($halamanAktif < $jumlahHalaman) : ?>
+                      <li class="waves-effect">
+                        <a href="?page=<?= $halamanAktif + 1; ?>"><i class="material-icons">chevron_right</i></a>
+                      </li>
+                      <?php else : ?>
+                        <li class="disabled">
+                          <a href=""><i class="material-icons">chevron_right</i></a>
+                        </li>
+                      <?php endif; ?>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!--JavaScript at end of body for optimized loading-->
+          <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+        </body>
+        </html>
