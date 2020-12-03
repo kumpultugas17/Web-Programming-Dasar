@@ -1,4 +1,10 @@
 <?php 
+session_start();
+if (!isset($_SESSION["password"])) {
+  header("Location:login.php");
+  exit;
+}
+
 include 'koneksi.php';
 
 $uploadOk = 1;
@@ -52,5 +58,5 @@ if ($uploadOk == 0) {
             header('Location:edit_biodata.php');
         }
     }
-    header('Location:index.php');
+    header('Location:biodata.php');
 }

@@ -1,4 +1,11 @@
-<?php include 'koneksi.php';
+<?php
+session_start();
+if (!isset($_SESSION["password"])) {
+  header("Location:login.php");
+  exit;
+}
+
+include 'koneksi.php';
 
 $uploadOk = 1;
 $nama_depan = $_POST['nama_depan'];
@@ -40,7 +47,7 @@ if ($uploadOk == 0) {
 
     if (move_uploaded_file($tmp, $path)) {
         $sql = $koneksi->query("INSERT INTO biodata VALUES ('', '$nama', '$tgl_lahir', '$agama', '$jenis_kelamin', '$alamat', '$telepon', '$email', '$fotobaru')");
-        header('Location:index.php');
+        header('Location:biodata.php');
     }
 }
 

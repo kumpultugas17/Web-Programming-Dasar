@@ -1,4 +1,10 @@
 <?php 
+session_start();
+if (!isset($_SESSION["password"])) {
+  header("Location:login.php");
+  exit;
+}
+
 include 'koneksi.php';
 $id = $_GET['id'];
 
@@ -58,7 +64,7 @@ $row = mysqli_fetch_assoc($sql);
                         </table>
                     </div>
                     <div class="card-action">
-                        <a href="index.php">Kembali</a>
+                        <a href="biodata.php">Kembali</a>
                     </div>
                 </div>
             </div>

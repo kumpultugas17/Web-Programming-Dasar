@@ -1,4 +1,10 @@
 <?php 
+session_start();
+if (!isset($_SESSION["password"])) {
+  header("Location:login.php");
+  exit;
+}
+
 include 'koneksi.php';
 $sql = $koneksi->query("SELECT * FROM biodata");
 ?>
